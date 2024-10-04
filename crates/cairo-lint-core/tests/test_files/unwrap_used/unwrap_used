@@ -1,13 +1,144 @@
-//! > Single Unwrap
+//! > Test: No unwrap used
 //! > cairo_code
 fn main() {
-  let _x = Option::<i32>::None.expect("Expected Some value, found None"); // Explicitly specify Option type
+  let x = Some(5);
+  let y = x.expect("Value should exist");
 }
-
 //! > diagnostics
-// No diagnostics will be generated since unwrap() has been replaced with expect().
-
 //! > fixed
 fn main() {
-  let _x = Some(2).expect("Expected Some value, found None"); // This will work and provide a clear error message if None is encountered
+  let x = Some(5);
+  let y = x.expect("Value should exist");
+}
+
+//! > Test: Simple unwrap used
+//! > cairo_code
+fn main() {
+  let x = Some(5);
+  let y = x.unwrap();
+}
+//! > diagnostics
+warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
+--> lib.cairo:3:13
+|
+3 |     let y = x.unwrap();
+|             ^^^^^^^^^^
+//! > fixed
+fn main() {
+  let x = Some(5);
+  let y = x.unwrap();
+}
+
+//! > Test: Multiple unwraps used
+//! > cairo_code
+fn main() {
+  let x = Some(5);
+  let y = Some("hello");
+  let a = x.unwrap();
+  let b = y.unwrap();
+}
+//! > diagnostics
+warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
+--> lib.cairo:4:13
+|
+4 |     let a = x.unwrap();
+|             ^^^^^^^^^^
+
+warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
+--> lib.cairo:5:13
+|
+5 |     let b = y.unwrap();
+|             ^^^^^^^^^^
+//! > fixed
+fn main() {
+  let x = Some(5);
+  let y = Some("hello");
+  let a = x.unwrap();
+  let b = y.unwrap();
+}
+
+//! > Test: Unwrap in a nested function
+//! > cairo_code
+fn inner_function() -> u32 {
+  Some(42).unwrap()
+}
+
+fn main() {
+  let result = inner_function();
+}
+//! > diagnostics
+warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
+--> lib.cairo:2:14
+|
+2 |     Some(42).unwrap()
+|              ^^^^^^^
+//! > fixed
+fn inner_function() -> u32 {
+  Some(42).unwrap()
+}
+
+fn main() {
+  let result = inner_function();
+}
+
+//! > Test: Unwrap in a method chain
+//! > cairo_code
+fn main() {
+  let x = vec![1, 2, 3];
+  let first = x.first().unwrap();
+}
+//! > diagnostics
+warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
+--> lib.cairo:3:25
+|
+3 |     let first = x.first().unwrap();
+|                         ^^^^^^^^^^
+//! > fixed
+fn main() {
+  let x = vec![1, 2, 3];
+  let first = x.first().unwrap();
+}
+
+//! > Test: Unwrap with a different variable name
+//! > cairo_code
+fn main() {
+  let unwrap_me = Some("test");
+  let result = unwrap_me.unwrap();
+}
+//! > diagnostics
+warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
+--> lib.cairo:3:21
+|
+3 |     let result = unwrap_me.unwrap();
+|                           ^^^^^^^^
+//! > fixed
+fn main() {
+  let unwrap_me = Some("test");
+  let result = unwrap_me.unwrap();
+}
+
+//! > Test: Unwrap in a complex expression
+//! > cairo_code
+fn main() {
+  let x = Some(5);
+  let y = Some(10);
+  let result = x.unwrap() + y.unwrap() * 2;
+}
+//! > diagnostics
+warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
+--> lib.cairo:4:18
+|
+4 |     let result = x.unwrap() + y.unwrap() * 2;
+|                  ^^^^^^^^^^
+
+warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
+--> lib.cairo:4:32
+|
+4 |     let result = x.unwrap() + y.unwrap() * 2;
+|                                ^^^^^^^^^^
+//! > fixed
+fn main() {
+  let x = Some(5);
+  let y = Some(10);
+  let result = x.unwrap() + y.unwrap() * 2;
 }
