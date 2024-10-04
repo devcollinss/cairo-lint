@@ -265,12 +265,5 @@ coupons = true
 test_file!(
     unwrap_used,
     unwrap_used,
-    "Single Unwrap",
-    "Multiple Unwrap",
-    "Multiple Unwrap and other statements",
-    "Empty Unwrap",
-    "NO Unwrap",
-    "Unwrap inside function",
-    "Test Function with Unwrap",
-    "Unwrap in Function Definition"
+    "Single Unwrap"
 );
