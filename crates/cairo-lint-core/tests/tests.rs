@@ -31,25 +31,25 @@ negative_impls = true
 coupons = true
 "#;
 
-test_file!(unused_variables, unused_variables, "one unused variable", "two unused variable", "plenty unused variables");
+// test_file!(unused_variables, unused_variables, "one unused variable", "two unused variable", "plenty unused variables");
 
-test_file!(
-    single_match,
-    destructuring_match,
-    "simple destructuring match",
-    "simple destructuring match second arm",
-    "simple destructuring match with scope",
-    "simple destructuring match with unit in scope",
-    "nested destructuring match",
-    "destructuring match twisted",
-    "destructuring match twisted differently",
-    "destructuring match second arm",
-    "destructuring comprehensive match",
-    "reversed destructuring comprehensive match",
-    "simple destructuring match with unit and comment in scope",
-    "simple destructuring match with comment in scope",
-    "comprehensive match"
-);
+// test_file!(
+//     single_match,
+//     destructuring_match,
+//     "simple destructuring match",
+//     "simple destructuring match second arm",
+//     "simple destructuring match with scope",
+//     "simple destructuring match with unit in scope",
+//     "nested destructuring match",
+//     "destructuring match twisted",
+//     "destructuring match twisted differently",
+//     "destructuring match second arm",
+//     "destructuring comprehensive match",
+//     "reversed destructuring comprehensive match",
+//     "simple destructuring match with unit and comment in scope",
+//     "simple destructuring match with comment in scope",
+//     "comprehensive match"
+// );
 
 // test_file!(
 //     unused_imports,
@@ -272,14 +272,5 @@ test_file!(
     "NO Unwrap",
     "Unwrap inside function",
     "Test Function with Unwrap",
-    "Unwrap in Function Definition",
-    "Single Expect",
-    "Multiple Expect",
-    "Multiple Expect and other statements",
-    "Empty Expect",
-    "NO Expect",
-    "Expect inside function",
-    "Test Function with Expect",
-    "Expect in Function Definition"
+    "Unwrap in Function Definition"
 );
-

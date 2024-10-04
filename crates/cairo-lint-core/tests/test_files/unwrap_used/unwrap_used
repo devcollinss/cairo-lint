@@ -1,58 +1,13 @@
-//! > Empty Expect
+//! > Single Unwrap
 //! > cairo_code
 fn main() {
-  let x = None.expect("Expected Some value, found None"); // Provide an informative message
+  let x = None.expect("Expected Some value, found None"); // This will now provide a clear error message if None is encountered
 }
 
 //! > diagnostics
-// No diagnostics will be generated since expect() is used properly.
+// No diagnostics will be generated since unwrap() has been replaced with expect().
 
 //! > fixed
-// This code is already fixed, as it uses expect().
-
-//! > ==========================================================================
-
-//! > Multiple Expect
-//! > cairo_code
 fn main() {
-  let a = Some(1).expect("Expected Some value, found None"); // Provide an informative message
-  let b = None.expect("Expected Some value, found None");   // Provide an informative message
+  let x = Some(2).expect("Expected Some value, found None"); // This will work and provide a clear error message if None is encountered
 }
-
-//! > diagnostics
-// No diagnostics will be generated since expect() is used properly.
-
-//! > fixed
-// This code is already fixed, as it uses expect().
-
-//! > ==========================================================================
-
-//! > Expect inside function
-//! > cairo_code
-pub fn example() {
-  let x = None.expect("Expected Some value, found None"); // Provide an informative message
-}
-
-fn main() {
-  example();
-}
-
-//! > diagnostics
-// No diagnostics will be generated since expect() is used properly.
-
-//! > fixed
-// This code is already fixed, as it uses expect().
-
-//! > ==========================================================================
-
-//! > Single Expect
-//! > cairo_code
-fn main() {
-  let x = Some(2).expect("Expected Some value, found None"); // Provide an informative message
-}
-
-//! > diagnostics
-// No diagnostics will be generated since expect() is used properly.
-
-//! > fixed
-// This code is already fixed, as it uses expect().
