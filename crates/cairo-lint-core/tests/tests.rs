@@ -263,8 +263,8 @@ test_file!(
 // );
 
 test_file!(
-    unwrap,
-    unwrap,
+    unwrap_used,
+    unwrap_used,
     "Single Unwrap",
     "Multiple Unwrap",
     "Multiple Unwrap and other statements",

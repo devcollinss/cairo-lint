@@ -1,6 +1,5 @@
-// Test cases for unwrap usage detection in Cairo code
-
 //! > Empty Unwrap
+
 //! > cairo_code
 fn main() {
   let x = None.unwrap(); // This should trigger a warning
@@ -9,9 +8,9 @@ fn main() {
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
 --> lib.cairo:2:16
-|
+  |
 2 |     let x = None.unwrap();
-|                ^^^^^^^
+  |                ^^^^^^^
 
 //! > fixed
 fn main() {
