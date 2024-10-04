@@ -21,7 +21,7 @@ jobs:
         run: cargo clippy -- -D warnings
 
       - name: Run cargo test
-        run: CORELIB_PATH="$(pwd)/cairo/corelib/src" cargo test
+        run: CORELIB_PATH="$(pwd)/cairo/corelib/src" RUST_BACKTRACE=1 cargo test
         
       - name: Run cargo fmt
         run: rustup toolchain install nightly && rustup component add --toolchain nightly-x86_64-unknown-linux-gnu rustfmt && cargo +nightly fmt -- --check
