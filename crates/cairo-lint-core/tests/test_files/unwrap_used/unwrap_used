@@ -1,4 +1,4 @@
-// no unwrap used
+// Test: no unwrap used
 //! > cairo_code
 fn main() {
   let x = Some(5);
