@@ -2,7 +2,7 @@
 
 //! > cairo_code
 fn main() {
-  let x = None.unwrap(); // This should trigger a warning
+  let x = None.expect("Expected Some value, found None"); // Provide an informative message
 }
 
 //! > diagnostics
