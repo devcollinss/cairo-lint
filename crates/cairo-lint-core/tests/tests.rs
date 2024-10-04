@@ -264,7 +264,7 @@ coupons = true
 
 test_file!(
     unwrap_used,
-    unwrap_expect,
+    unwrap_used,
     "test no unwrap used",
     "test simple unwrap used",
     "test multiple unwraps used",
