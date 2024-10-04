@@ -1,7 +1,7 @@
 //! > Single Unwrap
 //! > cairo_code
 fn main() {
-  let x = None.expect("Expected Some value, found None"); // This will now provide a clear error message if None is encountered
+  let x = None::<i32>.expect("Expected Some value, found None"); // Explicitly specify the type
 }
 
 //! > diagnostics
