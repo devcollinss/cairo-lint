@@ -272,5 +272,14 @@ test_file!(
     "NO Unwrap",
     "Unwrap inside function",
     "Test Function with Unwrap",
-    "Unwrap in Function Definition"
+    "Unwrap in Function Definition",
+    "Single Expect",
+    "Multiple Expect",
+    "Multiple Expect and other statements",
+    "Empty Expect",
+    "NO Expect",
+    "Expect inside function",
+    "Test Function with Expect",
+    "Expect in Function Definition"
 );
+

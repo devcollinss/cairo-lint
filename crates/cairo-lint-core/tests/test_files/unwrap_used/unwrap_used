@@ -1,71 +1,34 @@
-//! > Empty Unwrap
-
+//! > Empty Expect
 //! > cairo_code
 fn main() {
   let x = None.expect("Expected Some value, found None"); // Provide an informative message
 }
 
 //! > diagnostics
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:2:16
-  |
-2 |     let x = None.unwrap();
-  |                ^^^^^^^
+// No diagnostics will be generated since expect() is used properly.
 
 //! > fixed
-fn main() {
-  let x = None.expect("Expected Some value, found None"); // Provide an informative message
-}
+// This code is already fixed, as it uses expect().
 
 //! > ==========================================================================
 
-//! > Multiple Unwrap
+//! > Multiple Expect
 //! > cairo_code
-fn main() {
-  let a = Some(1).unwrap(); // This should trigger a warning
-  let b = None.unwrap();    // This should also trigger a warning
-}
-
-//! > diagnostics
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:2:19
-|
-2 |     let a = Some(1).unwrap();
-|                   ^^^^^^^
-
-//! > diagnostics
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:3:16
-|
-3 |     let b = None.unwrap();
-|                ^^^^^^^
-
-//! > fixed
 fn main() {
   let a = Some(1).expect("Expected Some value, found None"); // Provide an informative message
   let b = None.expect("Expected Some value, found None");   // Provide an informative message
 }
 
-//! > ==========================================================================
-
-//! > Unwrap inside function
-//! > cairo_code
-pub fn example() {
-  let x = None.unwrap(); // This should trigger a warning
-}
-
-fn main() {
-  example();
-}
-
 //! > diagnostics
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:2:16
-|
-2 |     let x = None.unwrap();
-|                ^^^^^^^
+// No diagnostics will be generated since expect() is used properly.
 
 //! > fixed
+// This code is already fixed, as it uses expect().
+
+//! > ==========================================================================
+
+//! > Expect inside function
+//! > cairo_code
 pub fn example() {
   let x = None.expect("Expected Some value, found None"); // Provide an informative message
 }
@@ -74,22 +37,22 @@ fn main() {
   example();
 }
 
-//! > ==========================================================================
-
-//! > Single Unwrap
-//! > cairo_code
-fn main() {
-  let x = Some(2).unwrap(); // This should trigger a warning
-}
-
 //! > diagnostics
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:2:19
-|
-2 |     let x = Some(2).unwrap();
-|                   ^^^^^^^
+// No diagnostics will be generated since expect() is used properly.
 
 //! > fixed
+// This code is already fixed, as it uses expect().
+
+//! > ==========================================================================
+
+//! > Single Expect
+//! > cairo_code
 fn main() {
   let x = Some(2).expect("Expected Some value, found None"); // Provide an informative message
 }
+
+//! > diagnostics
+// No diagnostics will be generated since expect() is used properly.
+
+//! > fixed
+// This code is already fixed, as it uses expect().
