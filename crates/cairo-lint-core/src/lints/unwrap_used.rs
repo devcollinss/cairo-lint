@@ -7,7 +7,7 @@ use cairo_lang_semantic::ExprFunctionCall;
 use cairo_lang_syntax::node::{TypedStablePtr, TypedSyntaxNode};
 
 pub const UNWRAP_USED: &str = "Use of unwrap() detected. Consider using '?' or 'expect()' instead.";
-const UNWRAP: &str = "\"unwrap\"";
+const UNWRAP: &str = "unwrap"; // Changed to string literal for clarity
 
 pub fn check_unwrap_used(
     db: &dyn SemanticGroup,

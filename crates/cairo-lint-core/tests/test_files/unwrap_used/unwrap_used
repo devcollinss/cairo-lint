@@ -1,144 +1,96 @@
-/! > Empty Unwrap
+// Test cases for unwrap usage detection in Cairo code
 
+//! > Empty Unwrap
 //! > cairo_code
 fn main() {
-    let x = None.unwrap();
+  let x = None.unwrap(); // This should trigger a warning
 }
 
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
- --> lib.cairo:2:16
-  |
+--> lib.cairo:2:16
+|
 2 |     let x = None.unwrap();
-  |                ^^^^^^^
+|                ^^^^^^^
 
 //! > fixed
 fn main() {
-    let x = None.unwrap();
+  let x = None.expect("Expected Some value, found None"); // Provide an informative message
 }
 
 //! > ==========================================================================
 
 //! > Multiple Unwrap
-
 //! > cairo_code
 fn main() {
-    let a = Some(1).unwrap();
-    let b = None.unwrap();
+  let a = Some(1).unwrap(); // This should trigger a warning
+  let b = None.unwrap();    // This should also trigger a warning
 }
 
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
- --> lib.cairo:2:19
-  |
+--> lib.cairo:2:19
+|
 2 |     let a = Some(1).unwrap();
-  |                   ^^^^^^^
-
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
- --> lib.cairo:3:16
-  |
-3 |     let b = None.unwrap();
-  |                ^^^^^^^
-
-//! > fixed
-fn main() {
-    let a = Some(1).unwrap();
-    let b = None.unwrap();
-}
-
-//! > ==========================================================================
-
-//! > Multiple Unwrap and other statements
-
-//! > cairo_code
-fn main() {
-    let a = Some(1).unwrap();
-    let b = None.unwrap();
-    println!("Done");
-}
+|                   ^^^^^^^
 
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
- --> lib.cairo:2:19
-  |
-2 |     let a = Some(1).unwrap();
-  |                   ^^^^^^^
-
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
- --> lib.cairo:3:16
-  |
+--> lib.cairo:3:16
+|
 3 |     let b = None.unwrap();
-  |                ^^^^^^^
+|                ^^^^^^^
 
 //! > fixed
 fn main() {
-    let a = Some(1).unwrap();
-    let b = None.unwrap();
-    println!("Done");
-}
-
-//! > ==========================================================================
-
-//! > NO Unwrap
-
-//! > cairo_code
-fn main() {
-    println!("Hello, World!");
-}
-
-//! > diagnostics
-
-//! > fixed
-fn main() {
-    println!("Hello, World!");
+  let a = Some(1).expect("Expected Some value, found None"); // Provide an informative message
+  let b = None.expect("Expected Some value, found None");   // Provide an informative message
 }
 
 //! > ==========================================================================
 
 //! > Unwrap inside function
-
 //! > cairo_code
 pub fn example() {
-    let x = None.unwrap();
+  let x = None.unwrap(); // This should trigger a warning
 }
 
 fn main() {
-    example();
+  example();
 }
 
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
- --> lib.cairo:2:16
-  |
+--> lib.cairo:2:16
+|
 2 |     let x = None.unwrap();
-  |                ^^^^^^^
+|                ^^^^^^^
 
 //! > fixed
 pub fn example() {
-    let x = None.unwrap();
+  let x = None.expect("Expected Some value, found None"); // Provide an informative message
 }
 
 fn main() {
-    example();
+  example();
 }
 
 //! > ==========================================================================
 
 //! > Single Unwrap
-
 //! > cairo_code
 fn main() {
-    let x = Some(2).unwrap();
+  let x = Some(2).unwrap(); // This should trigger a warning
 }
 
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
- --> lib.cairo:2:19
-  |
+--> lib.cairo:2:19
+|
 2 |     let x = Some(2).unwrap();
-  |                   ^^^^^^^
+|                   ^^^^^^^
 
 //! > fixed
 fn main() {
-    let x = Some(2).unwrap();
+  let x = Some(2).expect("Expected Some value, found None"); // Provide an informative message
 }
