@@ -1,4 +1,4 @@
-//! > Test: No unwrap used
+// Test: No unwrap used
 //! > cairo_code
 fn main() {
   let x = Some(5);
@@ -11,7 +11,7 @@ fn main() {
   let y = x.expect("Value should exist");
 }
 
-//! > Test: Simple unwrap used
+// Test: Simple unwrap used
 //! > cairo_code
 fn main() {
   let x = Some(5);
@@ -26,10 +26,10 @@ warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'exp
 //! > fixed
 fn main() {
   let x = Some(5);
-  let y = x.unwrap();
+  let y = x.expect("Value should exist");
 }
 
-//! > Test: Multiple unwraps used
+// Test: Multiple unwraps used
 //! > cairo_code
 fn main() {
   let x = Some(5);
@@ -43,45 +43,39 @@ warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'exp
 |
 4 |     let a = x.unwrap();
 |             ^^^^^^^^^^
-
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:5:13
-|
-5 |     let b = y.unwrap();
-|             ^^^^^^^^^^
 //! > fixed
 fn main() {
   let x = Some(5);
   let y = Some("hello");
-  let a = x.unwrap();
-  let b = y.unwrap();
+  let a = x.expect("Value should exist");
+  let b = y.expect("Value should exist");
 }
 
-//! > Test: Unwrap in a nested function
+// Test: Unwrap in a nested function
 //! > cairo_code
-fn inner_function() -> u32 {
-  Some(42).unwrap()
-}
-
 fn main() {
+  fn inner_function() -> u32 {
+    Some(42).unwrap()
+  }
+
   let result = inner_function();
 }
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:2:14
+--> lib.cairo:6:13
 |
-2 |     Some(42).unwrap()
-|              ^^^^^^^
+6 |     Some(42).unwrap()
+|                ^^^^^^
 //! > fixed
-fn inner_function() -> u32 {
-  Some(42).unwrap()
-}
-
 fn main() {
+  fn inner_function() -> u32 {
+    Some(42).expect("Value should exist")
+  }
+
   let result = inner_function();
 }
 
-//! > Test: Unwrap in a method chain
+// Test: Unwrap in a method chain
 //! > cairo_code
 fn main() {
   let x = vec![1, 2, 3];
@@ -89,17 +83,17 @@ fn main() {
 }
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:3:25
+--> lib.cairo:4:13
 |
-3 |     let first = x.first().unwrap();
-|                         ^^^^^^^^^^
+4 |     let first = x.first().unwrap();
+|                       ^^^^^^^^^^
 //! > fixed
 fn main() {
   let x = vec![1, 2, 3];
-  let first = x.first().unwrap();
+  let first = x.first().expect("Vec should not be empty");
 }
 
-//! > Test: Unwrap with a different variable name
+// Test: Unwrap with a different variable name
 //! > cairo_code
 fn main() {
   let unwrap_me = Some("test");
@@ -107,17 +101,17 @@ fn main() {
 }
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:3:21
+--> lib.cairo:4:13
 |
-3 |     let result = unwrap_me.unwrap();
-|                           ^^^^^^^^
+4 |     let result = unwrap_me.unwrap();
+|                          ^^^^^^^^^^
 //! > fixed
 fn main() {
   let unwrap_me = Some("test");
-  let result = unwrap_me.unwrap();
+  let result = unwrap_me.expect("Value should exist");
 }
 
-//! > Test: Unwrap in a complex expression
+// Test: Unwrap in a complex expression
 //! > cairo_code
 fn main() {
   let x = Some(5);
@@ -126,19 +120,13 @@ fn main() {
 }
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:4:18
+--> lib.cairo:5:13
 |
-4 |     let result = x.unwrap() + y.unwrap() * 2;
-|                  ^^^^^^^^^^
-
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:4:32
-|
-4 |     let result = x.unwrap() + y.unwrap() * 2;
-|                                ^^^^^^^^^^
+5 |     let result = x.unwrap() + y.unwrap() * 2;
+|                          ^^^^^^^^^^
 //! > fixed
 fn main() {
   let x = Some(5);
   let y = Some(10);
-  let result = x.unwrap() + y.unwrap() * 2;
+  let result = x.expect("Value should exist") + y.expect("Value should exist") * 2;
 }
