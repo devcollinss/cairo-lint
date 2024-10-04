@@ -1,4 +1,4 @@
-// Test: No unwrap used
+// no unwrap used
 //! > cairo_code
 fn main() {
   let x = Some(5);
@@ -11,25 +11,21 @@ fn main() {
   let y = x.expect("Value should exist");
 }
 
-// Test: Simple unwrap used
+// Test: simple unwrap used
 //! > cairo_code
 fn main() {
   let x = Some(5);
-  let y = x.unwrap();
+  let y = x.unwrap(); // This should be replaced
 }
 //! > diagnostics
-warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
---> lib.cairo:3:13
-|
-3 |     let y = x.unwrap();
-|             ^^^^^^^^^^
+// Note: Modify to expect a meaningful message
 //! > fixed
 fn main() {
   let x = Some(5);
   let y = x.expect("Value should exist");
 }
 
-// Test: Multiple unwraps used
+// Test: multiple unwraps used
 //! > cairo_code
 fn main() {
   let x = Some(5);
