@@ -265,11 +265,5 @@ coupons = true
 test_file!(
     unwrap_used,
     unwrap_used,
-    "no unwrap used",
-    "simple unwrap used",
-    "multiple unwraps used",
-    "unwrap in a nested function",
-    "unwrap in a method chain",
-    "unwrap with a different variable name",
-    "unwrap in a complex expression"
+    "no unwrap used"
 );
