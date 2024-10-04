@@ -1,4 +1,4 @@
-//! > no unwrap used
+//! > no_unwrap_used
 //! > cairo_code
 fn main() {
   let x = Some(5);
@@ -11,7 +11,7 @@ fn main() {
   let y = x.expect("Value should exist");
 }
 
-//! > simple unwrap used
+//! > simple_unwrap_used
 //! > cairo_code
 fn main() {
   let x = Some(5);
@@ -25,7 +25,7 @@ fn main() {
   let y = x.expect("Value should exist");
 }
 
-//! > multiple unwraps used
+//! > multiple_unwraps_used
 //! > cairo_code
 fn main() {
   let x = Some(5);
@@ -47,11 +47,11 @@ fn main() {
   let b = y.expect("Value should exist");
 }
 
-//! > unwrap in a nested function
+//! > unwrap_in_nested_function
 //! > cairo_code
 fn main() {
   fn inner_function() -> u32 {
-    Some(42).unwrap()
+      Some(42).unwrap()
   }
 
   let result = inner_function();
@@ -65,13 +65,13 @@ warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'exp
 //! > fixed
 fn main() {
   fn inner_function() -> u32 {
-    Some(42).expect("Value should exist")
+      Some(42).expect("Value should exist")
   }
 
   let result = inner_function();
 }
 
-//! >  unwrap in a method chain
+//! > unwrap_in_method_chain
 //! > cairo_code
 fn main() {
   let x = vec![1, 2, 3];
@@ -89,7 +89,7 @@ fn main() {
   let first = x.first().expect("Vec should not be empty");
 }
 
-//! > unwrap with a different variable name
+//! > unwrap_with_different_variable_name
 //! > cairo_code
 fn main() {
   let unwrap_me = Some("test");
@@ -107,7 +107,7 @@ fn main() {
   let result = unwrap_me.expect("Value should exist");
 }
 
-//! > unwrap in a complex expression
+//! > unwrap_in_complex_expression
 //! > cairo_code
 fn main() {
   let x = Some(5);
