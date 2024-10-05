@@ -31,7 +31,8 @@ negative_impls = true
 coupons = true
 "#;
 
-// test_file!(unused_variables, unused_variables, "one unused variable", "two unused variable", "plenty unused variables");
+// test_file!(unused_variables, unused_variables, "one unused variable", "two unused variable",
+// "plenty unused variables");
 
 // test_file!(
 //     single_match,
@@ -107,7 +108,8 @@ coupons = true
 //     "loop match pop front with sutff in none"
 // );
 
-// test_file!(breaks, breaks, "Simple break", "Break inside of if", "Break inside of if with comment");
+// test_file!(breaks, breaks, "Simple break", "Break inside of if", "Break inside of if with
+// comment");
 
 // test_file!(
 //     ifs,
@@ -262,10 +264,4 @@ coupons = true
 //     "test manual match result with unwrapped error"
 // );
 
-test_file!(
-    unwrap_used,
-    unwrap_used,
-    "simple unwrap used",
-    "simple unwrap"
-
-);
+test_file!(unwrap_used, unwrap_used, "Single Unwrap");
