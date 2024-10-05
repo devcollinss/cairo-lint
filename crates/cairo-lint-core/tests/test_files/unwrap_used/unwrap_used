@@ -1,19 +1,23 @@
+// Updated test for Single Unwrap
+
 //! > Single Unwrap
 
 //! > cairo_code
 fn main() {
-  let x = Some(2).unwrap();
+  let x: Option<i32> = Some(2); // Explicit type for clarity
+  let value = x.unwrap(); // Retain usage to avoid warnings
 }
 
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
 --> lib.cairo:2:16
 |
-2 |     let x = Some(2).unwrap();
+2 |     let value = x.unwrap();
 |                ^^^^^^^^
 |
 
 //! > fixed
 fn main() {
-  let x = Some(2).unwrap();
+  let x: Option<i32> = Some(2);
+  let value = x.expect("Expected Some value"); // Use expect to provide better error handling
 }
