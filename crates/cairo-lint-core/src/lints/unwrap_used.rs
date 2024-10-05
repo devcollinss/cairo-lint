@@ -15,12 +15,17 @@ pub fn check_unwrap_used(
 
     // Check if the function used is `unwrap`
     if function_name == "unwrap" {
-        // Retrieve diagnostic information
+        // Retrieve the stable pointer for diagnostics
         let stable_ptr = expr_function_call.stable_ptr;
+
+        // Push the diagnostic message to the diagnostics vector
         diagnostics.push(PluginDiagnostic {
-            stable_ptr: stable_ptr.into(),
-            message: "Use of unwrap() detected. Consider using '?' or 'expect()' instead.".to_string(),
+            stable_ptr: stable_ptr.into(), // Ensure this correctly converts to the expected type
+            message: UNWRAP_USED.to_string(), // Use the constant message for consistency
             severity: Severity::Warning,
         });
+    } else {
+        // Log a message or handle the case where the function is not `unwrap`
+        println!("Function '{}' called, no diagnostic triggered.", function_name);
     }
 }
