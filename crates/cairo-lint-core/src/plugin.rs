@@ -269,7 +269,7 @@ fn check_function(
             }
             Expr::FunctionCall(expr_func) => {
                 panic::check_panic_usage(db, expr_func, diagnostics);
-                unwrap_used::check_unwrap_used(db.upcast(), &expr_func, diagnostics);
+                unwrap_used::check_unwrap_used(db.upcast(), expr_func, diagnostics);
             }
             _ => (),
         };
