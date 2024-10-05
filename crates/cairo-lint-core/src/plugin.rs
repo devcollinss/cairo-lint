@@ -195,7 +195,7 @@ impl AnalyzerPlugin for CairoLint {
         diags
     }
 }
-fn check_function(db: &dyn SemanticGroup, func_id: FunctionWithBodyId, mut diagnostics: &mut Vec<PluginDiagnostic>) {
+fn check_function(db: &dyn SemanticGroup, func_id: FunctionWithBodyId, diagnostics: &mut Vec<PluginDiagnostic>) {
     duplicate_underscore_args::check_duplicate_underscore_args(
         db.function_with_body_signature(func_id).unwrap().params,
         diagnostics,
