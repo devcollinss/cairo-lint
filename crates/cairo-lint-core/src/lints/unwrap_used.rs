@@ -12,9 +12,12 @@ pub fn check_unwrap_used(
 ) {
     let function_id = expr_function_call.function;
     let function_name = function_id.name(db);
-
+    
+    // Print debug information to understand what function is being called
+    println!("Function called: {:?}", function_name);
+    
     // Check if the function used is `unwrap`
-    if function_name == "unwrap" {
+    if function_name == "unwrap" || function_name.ends_with("::unwrap") {
         // Retrieve the stable pointer for diagnostics
         let stable_ptr = expr_function_call.stable_ptr;
 
