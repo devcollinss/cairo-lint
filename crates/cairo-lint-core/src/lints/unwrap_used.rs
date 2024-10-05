@@ -1,13 +1,9 @@
-use cairo_lang_defs::diagnostic_utils::StableLocation;
 use cairo_lang_defs::plugin::PluginDiagnostic;
 use cairo_lang_diagnostics::Severity;
-use cairo_lang_filesystem::db::get_originating_location;
 use cairo_lang_semantic::db::SemanticGroup;
 use cairo_lang_semantic::ExprFunctionCall;
-use cairo_lang_syntax::node::{TypedStablePtr, TypedSyntaxNode};
 
 pub const UNWRAP_USED: &str = "Use of unwrap() detected. Consider using '?' or 'expect()' instead.";
-const UNWRAP: &str = "unwrap";
 
 pub fn check_unwrap_used(
     db: &dyn SemanticGroup,
@@ -18,24 +14,13 @@ pub fn check_unwrap_used(
     let function_name = function_id.name(db);
 
     // Check if the function used is `unwrap`
-    if function_name == UNWRAP {
-        // Get the originating location for diagnostics
-        let (file_id, span) = get_originating_location(
-            db.upcast(),
-            StableLocation::new(expr_function_call.stable_ptr.untyped()).file_id(db.upcast()),
-            expr_function_call.stable_ptr.lookup(db.upcast()).as_syntax_node().span(db.upcast()),
-        );
-
-        if let Some(text_position) = span.position_in_file(db.upcast(), file_id) {
-            // Retrieve the syntax node for diagnostics
-            if let Ok(syntax_node) = db.file_syntax(file_id) {
-                let stable_ptr = syntax_node.lookup_position(db.upcast(), text_position.start).stable_ptr();
-                diagnostics.push(PluginDiagnostic {
-                    stable_ptr,
-                    message: UNWRAP_USED.to_owned(),
-                    severity: Severity::Warning,
-                });
-            }
-        }
+    if function_name == "unwrap" {
+        // Retrieve diagnostic information
+        let stable_ptr = expr_function_call.stable_ptr;
+        diagnostics.push(PluginDiagnostic {
+            stable_ptr: stable_ptr.into(),
+            message: "Use of unwrap() detected. Consider using '?' or 'expect()' instead.".to_string(),
+            severity: Severity::Warning,
+        });
     }
 }

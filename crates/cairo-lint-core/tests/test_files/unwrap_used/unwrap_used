@@ -1,9 +1,11 @@
 //! > Single Unwrap
+
 //! > cairo_code
 fn main() {
   let x: Option<i32> = Some(2);
   let value = x.unwrap();
 }
+
 //! > diagnostics
 warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'expect()' instead.
 --> lib.cairo:3:16
@@ -11,8 +13,9 @@ warning: Plugin diagnostic: Use of unwrap() detected. Consider using '?' or 'exp
 3 | let value = x.unwrap();
 |             ^^^^^^^^
 |
+
 //! > fixed
 fn main() {
   let x: Option<i32> = Some(2);
-  let value = x.unwrap();
+  let value = x.expect("Expected a value");
 }
